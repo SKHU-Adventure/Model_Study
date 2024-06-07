@@ -4,26 +4,15 @@ import lightning.pytorch as pl
 from setup import config
 from utils.util_model import LightningTripletNet
 from utils.util_dataset import LightningDataModule
+from utils.util_lightning import get_callbacks, get_logger
 
 
 def main():
 
     dataset = LightningDataModule(config)
     triplet_net = LightningTripletNet(config)
-    
-    tqdm_cb = pl.callbacks.TQDMProgressBar()
-    ckpt_cb = pl.callbacks.ModelCheckpoint(
-        filename="{epoch:02d}_",
-        save_last=True
-    )
-    early_stopping_cb = pl.callbacks.EarlyStopping(
-        monitor="val_loss",
-        patience=3,
-        mode="min"
-    )
-    lr_monitor_cb = pl.callbacks.LearningRateMonitor(logging_interval='epoch')
-
-    callbacks = [tqdm_cb, ckpt_cb, early_stopping_cb, lr_monitor_cb]
+    callbacks = get_callbacks(config)
+    logger = get_logger(config)
 
     trainer = pl.Trainer(accelerator="gpu",
                         devices=config.gpu_ids,
@@ -32,7 +21,7 @@ def main():
                         use_distributed_sampler=True,
                         precision="16-mixed",
                         callbacks=callbacks,
-                        logger=True,
+                        logger=logger,
                         profiler="simple",
                         log_every_n_steps=1,
                         default_root_dir=config.base_dir)

@@ -57,6 +57,9 @@ where `[EXPERIMENT_DIR]` is the directory created above.
 Main contributors:
 
 - [Mujae Park](https://github.com/Mujae), ``mujae9837[at]gmail.com``
+- [Younguk Jeon](https://github.com/jayiuk), ``jayiuk987[at]gmail.com``
+- [Heeju Cha](https://github.com/JOOZOO20), ``qwsa7896[at]naver.com``
+- [Younah Kim](https://github.com/kkiwiio), ``kkiwiio[at]gmail.com``
 
 Advisior:
 - [Sangyun Lee](https://sylee-skhu.github.io), ``sylee[at]skhu.ac.kr``
